@@ -4,9 +4,7 @@
 
 #### By _**Tiffany Siu**_
 
-<!-- [![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive) -->
-<!-- [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) -->
-[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive)
 ![LastCommit](https://img.shields.io/github/last-commit/tsiu88/parkApi)
 ![Languages](https://img.shields.io/github/languages/top/tsiu88/parkApi)
 [![MIT license](https://img.shields.io/badge/License-MIT-orange.svg)](https://lbesson.mit-license.org/)
@@ -29,13 +27,9 @@
 ---
 ## Description
 
-_README under construction_
-
 This application is the Week 13 Friday independent assignment for Epicodus' full time Intro to Programming and C#/React course.  This is an application made to show building a custom API with full functionality and include a more advanced function.
 
-
-
-<!-- _Detailed desc w/ purpose/usage, what does, motivation to create, why exists, other info for users/developers to have_ -->
+For this API, a user can add information and locations of parks found in the US.  The parks can be stored with a name, type (national or state), description, location/city, and state.  The database can be searched for these properties with the correct route structure.  States can also be stored in another table in the database and also holds the number of parks that are within that state.  The number of parks updates when parks are added, deleted, or modified.
 
 ## Setup/Installation Requirements
 
@@ -48,6 +42,7 @@ _This program also makes use of SQL databases. We recommend using MySQL Workbenc
 * _ASP.NET Core MVC_
 * _MySQL Workbench_
 * _MySQL Community Server_
+* _Swagger Swashbuckle_
 * _Entity Framework_
 * _Command Prompt_
 * _Web Browser_
@@ -63,7 +58,7 @@ _This program also makes use of SQL databases. We recommend using MySQL Workbenc
 5. Start up a local server by opening MySQL Workbench and adding a `MySQL Connections` using the default IP address and Port (IP 127.0.0.1, Port 3306), username (root), and password from setup.
 6. Run `dotnet restore` and `dotnet build` in command line interface of the repository's main project directory
 7. Run `dotnet run` to start up the program in the command line interface
-8. Type the URL listed under "Now listening on:" into a web browser to view the API using built in [Swagger](https://swagger.io/) or use a program like [Postman](https://www.postman.com/) to call the API and view the information returned
+8. Type the URL listed under "Now listening on:" into a web browser to view the API using built in [SwaggerUI](https://swagger.io/) or use a program like [Postman](https://www.postman.com/) to call the API and view the information returned with manual route input
 
 
 ## Other Technologies Used
@@ -75,7 +70,7 @@ _This program also makes use of SQL databases. We recommend using MySQL Workbenc
 * _Markdown_
 
 ## Notable Features
-<!-- _features that make project stand out_ -->
+This API updates a running count of number of parks in a state as parks are added, deleted, and modified to switch states.
 
 ## Specifications
 
@@ -87,11 +82,11 @@ _This program also makes use of SQL databases. We recommend using MySQL Workbenc
 | The api displays a home screen with Swagger | Application start | Welcome screen displayed with all possible API calls |
 | The api is able to show all parks when GET method is used | GET http://localhost:5000/api/parks | Displays all parks with info |
 | The api is able to show all states when GET method is used | GET http://localhost:5000/api/states | Displays all states with info |
-| The api is able to show all national or state parks when GET method is used with parameters | GET http://localhost:5000/api/parks?type={national/state} | Displays all national or state parks with info |
-| The api is able to show all parks for a state when GET method is used with parameters | GET http://localhost:5000/api/parks?state={stateName} | Displays all state parks for that state with info |
-| The api is able to add parks with POST methods | POST http://localhost:5000/api/parks | Adds new park with provided info |
-| The api is able to edit/update existing parks with PUT method | PUT http://localhost:5000/api/{id} | Update existing park with provided info |
-| The api is able to delete existing parks with DELETE method | DELETE http://localhost:5000/api/{id} | Delete park from database |
+| The api is able to show all national or state parks (or other properties) when GET method is used with parameters | GET http://localhost:5000/api/parks?type={national/state} | Displays all national or state parks with info |
+| The api is able to show all parks for a state when GET method is used with multiple parameters | GET http://localhost:5000/api/parks?state={stateName}&type={national/state} | Displays all state parks for that state with info |
+| The api is able to add parks with POST methods | POST http://localhost:5000/api/parks | Adds new park with provided info and increase count of parks for that state |
+| The api is able to edit/update existing parks with PUT method | PUT http://localhost:5000/api/{id} | Update existing park with provided info and correct counts of parks for that state |
+| The api is able to delete existing parks with DELETE method | DELETE http://localhost:5000/api/{id} | Delete park from database and decrease count of parks for that state |
 
 </details>
 
@@ -108,10 +103,10 @@ _This program also makes use of SQL databases. We recommend using MySQL Workbenc
 
 #### Objectives:
 
-[ ] Application includes CRUD functionality and successfully returns responses to API calls.
-[ ] Application includes at least one of the further exploration objectives: authentication, versioning, pagination, Swagger documentation, or CORS.
-[ ] Application is well-documented, including specific documentation on further exploration.
-[ ] Commit history clearly shows eight hours of work.
+[x] Application includes CRUD functionality and successfully returns responses to API calls.
+[x] Application includes at least one of the further exploration objectives: authentication, versioning, pagination, Swagger documentation, or CORS.
+[x] Application is well-documented, including specific documentation on further exploration.
+[x] Commit history clearly shows eight hours of work.
 
 #### Further Exploration:
 
@@ -136,28 +131,26 @@ Once you complete the requirements for the code review, consider adding other fu
 
 ## Screenshots
 
-<!-- _Here is a snippet of what the input looks like:_
+_Here is a snippet of what the Swagger UI looks like:_
 
-![Snippet of input fields](img/snippet1.png)
+![Snippet of Swagger UI](./ParkApi/img/snippet1.png)
 
-_Here is a preview of what the output looks like:_
+_Here is a preview of what the park entries look like:_
 
-![Snippet of output box](img/snippet2.png) -->
+![Snippet of park entries](./ParkApi/img/snippet2.png)
 
-<!-- <details>
+_Here is a preview of what the states entries look like:_
+
+![Snippet of state entries](./ParkApi/img/snippet3.png)
+
+<details>
   <summary>Expand to view More Screenshots</summary>
 
-_Here is a preview of what the flavor details looks like:_
+_Here is a preview of using multiple parameters in GET method:_
 
-![Snippet of flavor details](./img-readme/snippet4.png)
+![Snippet of GET method parameters](./ParkApi/img/getparameters.gif)
 
-_Here is a preview of what the treats list looks like:_
-
-![Snippet of treats list](./img-readme/snippet5.png)
-
-</details> -->
-
-<!-- _{Show pictures using ![alt text](image.jpg), show what library does as concisely as possible but don't need to explain how project solves problem from `code`_ -->
+</details>
 
 ## Known Bugs
 
