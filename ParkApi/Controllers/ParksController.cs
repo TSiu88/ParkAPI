@@ -20,9 +20,30 @@ namespace ParkApi.Controllers
 
     // GET api/parks
     [HttpGet]
-    public ActionResult<IEnumerable<Park>> Get()
+    public ActionResult<IEnumerable<Park>> Get(string name, string type, string description, string location, string state)
     {
       var query = _db.Parks.Include(entry => entry.State).AsQueryable();
+
+      if (name != null)
+      {
+        query = query.Where(entry => entry.Name.Contains(name));
+      }
+      if (type != null)
+      {
+        query = query.Where(entry => entry.Type == type);
+      }
+      if (location != null)
+      {
+        query = query.Where(entry => entry.Location == location);
+      }
+      if (state != null)
+      {
+        query = query.Where(entry => entry.State.Name == state);
+      }
+      if (description != null)
+      {
+        query = query.Where(entry => entry.Description.Contains(description));
+      }
       return query.ToList();
     }
 
