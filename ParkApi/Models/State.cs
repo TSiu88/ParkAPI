@@ -17,5 +17,6 @@ namespace ParkApi.Models
     {
       this.Parks = new HashSet<Park>();
     }
+
   }
 }
