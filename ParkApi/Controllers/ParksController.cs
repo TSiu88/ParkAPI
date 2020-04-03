@@ -71,37 +71,11 @@ namespace ParkApi.Controllers
     public void Put(int id, [FromBody] Park park)
     {
       park.ParkId = id;
-      
-      //_db.Parks.Attach(park);
       var currentChange = _db.Entry(park).CurrentValues.Clone();
-      //_db.Entry(park).Reload();
-      
-      var original = _db.Entry(park).OriginalValues.Clone();
-      //GetValue<State>("State");
-      //original.NumberParks--;
-
-      //var query = _db.Parks.Include(entry => entry.State).AsQueryable();
-      
-      //State initial = query.FirstOrDefault(x=>x.ParkId == id).State;
-      //initial.NumberParks--;
-
+      var original = _db.Entry(park).GetDatabaseValues();
       _db.Entry(park).CurrentValues.SetValues(currentChange);
       _db.Entry(park).State = EntityState.Modified; 
-      // int initialStateId = _db.Entry(park).Property(u=>u.StateId).OriginalValue;
-      // Console.WriteLine("initial ", initialStateId);
-      // int currentStateId = _db.Entry(park).Property(u=>u.StateId).CurrentValue;
-      // Console.WriteLine("current ", currentStateId);
       _db.SaveChanges();
-
-      // int initialStateId = _db.Parks.FirstOrDefault(entry => entry.ParkId == id).StateId;
-      // State initialState = _db.States.Find(initialStateId);
-      // int increaseNumber = _db.States.Where(entry=> entry.StateId == initialStateId)
-      // .Include(entry=> entry.Parks).SelectMany(entry=> entry.Parks).Count();
-      // initialState.NumberParks = increaseNumber;
-      // State state = _db.States.Find(park.StateId);
-      // int decreaseNumber = _db.States.Where(entry=> entry.StateId == park.StateId)
-      // .SelectMany(entry=> entry.Parks).Count();
-      // state.NumberParks = decreaseNumber;
 
       State old = _db.States.FirstOrDefault(x=>x.StateId == original.GetValue<int>("StateId"));
       old.NumberParks--;
