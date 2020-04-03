@@ -1,4 +1,4 @@
-# _[Park API](https://github.com/TSiu88/#)_
+# _[Park API](https://github.com/TSiu88/parkApi)_
 
 #### _Week 13 Friday Independent Assignment for Epicodus, 04.03.2020_
 
@@ -7,8 +7,8 @@
 <!-- [![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive) -->
 <!-- [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) -->
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
-![LastCommit](https://img.shields.io/github/last-commit/tsiu88/wordcounter-csharp)
-![Languages](https://img.shields.io/github/languages/top/tsiu88/wordcounter-csharp)
+![LastCommit](https://img.shields.io/github/last-commit/tsiu88/parkApi)
+![Languages](https://img.shields.io/github/languages/top/tsiu88/parkApi)
 [![MIT license](https://img.shields.io/badge/License-MIT-orange.svg)](https://lbesson.mit-license.org/)
 
 ---
@@ -21,11 +21,11 @@
 3. [Notable Features](#notable-features)
 4. [Specifications](#specifications)
     - [Assigment Objectives](#assignment-objectives)
-5. [User Stories](#user-stories)
-6. [Screenshots](#screenshots)
-7. [Known Bugs](#known-bugs)
-8. [Support and Contact Details](#support-and-contact-details)
-9. [License](#license)
+    - [User Stories](#user-stories)
+5. [Screenshots](#screenshots)
+6. [Known Bugs](#known-bugs)
+7. [Support and Contact Details](#support-and-contact-details)
+8. [License](#license)
 ---
 ## Description
 
@@ -54,16 +54,16 @@ _This program also makes use of SQL databases. We recommend using MySQL Workbenc
 
 ### Instructions
 
-<!-- *This application may be viewed by:*
+*This application may be viewed by:*
 
 1. Download and install .NET Core from the [official website](https://dotnet.microsoft.com/download/dotnet-core/)
 2. Download and install MySQL Workbench and Community Server for Mac or Windows by following the instructions [here](https://www.learnhowtoprogram.com/c-and-net/getting-started-with-c/installing-and-configuring-mysql).
-3. Click clone the [repository](https://github.com/TSiu88/HairSalon.git) from my [GitHub page](https://github.com/TSiu88) to copy the repository link
+3. Click clone the [repository](https://github.com/TSiu88/ParkApi.git) from my [GitHub page](https://github.com/TSiu88) to copy the repository link
 4. Use a command line interface to type `git clone (repository-link-here)` to copy the project into the current folder and then move into the repository's directory that was just created with `cd (project-name-here)`
 5. Start up a local server by opening MySQL Workbench and adding a `MySQL Connections` using the default IP address and Port (IP 127.0.0.1, Port 3306), username (root), and password from setup.
 6. Run `dotnet restore` and `dotnet build` in command line interface of the repository's main project directory
 7. Run `dotnet run` to start up the program in the command line interface
-8. Type the URL listed under "Now listening on:" into a web browser to run -->
+8. Type the URL listed under "Now listening on:" into a web browser to view the API using built in [Swagger](https://swagger.io/) or use a program like [Postman](https://www.postman.com/) to call the API and view the information returned
 
 
 ## Other Technologies Used
@@ -79,18 +79,21 @@ _This program also makes use of SQL databases. We recommend using MySQL Workbenc
 
 ## Specifications
 
-<!-- <details>
+<details>
   <summary>Expand to view Specifications</summary>
 
 | Specification | Input | Output |
 | :-------------     | :------------- | :------------- |
-| The program displays welcome message and menu with prices | Application start | Welcome message and menu displayed |
-| The program displays special deals in readable format | Application start | Special deals displayed ("Buy 2, get 1 free" "3 for $5") |
-| The program takes input of user that is not an integer, then assume 0 ordered | Bread="aaa", Pastry="" | Bread=0, Pastry=0 |
-| The program takes number of loaves of bread and pastries and displays totals | Bread=4, Pastry=4 | Bread=$20, Pastry=$8, Total=$28 |
-| If input qualifies for special deals, costs calculated using discounted price | Bread=3, Pastry=3 | Bread=$10, Pastry=$5, Total=$15 |
+| The api displays a home screen with Swagger | Application start | Welcome screen displayed with all possible API calls |
+| The api is able to show all parks when GET method is used | GET http://localhost:5000/api/parks | Displays all parks with info |
+| The api is able to show all states when GET method is used | GET http://localhost:5000/api/states | Displays all states with info |
+| The api is able to show all national or state parks when GET method is used with parameters | GET http://localhost:5000/api/parks?type={national/state} | Displays all national or state parks with info |
+| The api is able to show all parks for a state when GET method is used with parameters | GET http://localhost:5000/api/parks?state={stateName} | Displays all state parks for that state with info |
+| The api is able to add parks with POST methods | POST http://localhost:5000/api/parks | Adds new park with provided info |
+| The api is able to edit/update existing parks with PUT method | PUT http://localhost:5000/api/{id} | Update existing park with provided info |
+| The api is able to delete existing parks with DELETE method | DELETE http://localhost:5000/api/{id} | Delete park from database |
 
-</details> -->
+</details>
 
 ### Assignment Objectives
 
@@ -119,13 +122,17 @@ Once you complete the requirements for the code review, consider adding other fu
 
 </details>
 
-## User Stories
+### User Stories
 
-<!-- * As a scheduler, I want to be able to organize nurses vacation schedules without much paperwork so that I can be more efficient.
-* As a scheduler, I want to see a list of requests with the overlapping dates and the nurses that sent in the requests organized by priority so I can see which staff member should have priority in getting the request approved. -->
+<details>
+  <summary>Expand to view User Stories</summary>
 
-<!-- * Give stories for people who will use this project and what they'd want it to do.  Can include customers/end users, programmers that maintain code, etc. Use "As a <job title/type of user/etc>, I want to...<what want program to achieve>... so that I can...<reason>.-->
+* As a user of the API, I want to be able to view all parks in the system so I can have a reference to all existing parks.
+* As a user of the API, I want to be able to view all parks by state or national status so I can distinguish which ones are the larger national parks or smaller state parks with more amenities.
+* As a user of the API, I want to be able to view all parks in a state so I can distinguish which ones are nearby in the same state.
+* As a maintainer of the API database, I want to be able to add, edit, or delete parks so I can keep the database up to date with correct information.
 
+</details>
 
 ## Screenshots
 
