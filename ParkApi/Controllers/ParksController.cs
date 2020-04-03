@@ -71,23 +71,27 @@ namespace ParkApi.Controllers
     public void Put(int id, [FromBody] Park park)
     {
       park.ParkId = id;
-      // var current = _db.Entry(park).CurrentValues.Clone();
-      // _db.Entry(park).Reload();
+      
+      //_db.Parks.Attach(park);
+      var currentChange = _db.Entry(park).CurrentValues.Clone();
+      //_db.Entry(park).Reload();
+      
+      var original = _db.Entry(park).OriginalValues.Clone();
+      //GetValue<State>("State");
+      //original.NumberParks--;
 
-      // Park initial = _db.Parks.Find(id);
-      // State initialState = initial.State;
+      //var query = _db.Parks.Include(entry => entry.State).AsQueryable();
+      
+      //State initial = query.FirstOrDefault(x=>x.ParkId == id).State;
+      //initial.NumberParks--;
 
-      // int decreaseNumber = _db.States.Where(entry=> entry.StateId == initialState.StateId)
-      // .SelectMany(entry=> entry.Parks).Count();
-      // initialState.NumberParks--;
-
-      // _db.Entry(park).CurrentValues.SetValues(current);
+      _db.Entry(park).CurrentValues.SetValues(currentChange);
       _db.Entry(park).State = EntityState.Modified; 
       // int initialStateId = _db.Entry(park).Property(u=>u.StateId).OriginalValue;
       // Console.WriteLine("initial ", initialStateId);
       // int currentStateId = _db.Entry(park).Property(u=>u.StateId).CurrentValue;
       // Console.WriteLine("current ", currentStateId);
-      // _db.SaveChanges();
+      _db.SaveChanges();
 
       // int initialStateId = _db.Parks.FirstOrDefault(entry => entry.ParkId == id).StateId;
       // State initialState = _db.States.Find(initialStateId);
@@ -98,6 +102,12 @@ namespace ParkApi.Controllers
       // int decreaseNumber = _db.States.Where(entry=> entry.StateId == park.StateId)
       // .SelectMany(entry=> entry.Parks).Count();
       // state.NumberParks = decreaseNumber;
+
+      State old = _db.States.FirstOrDefault(x=>x.StateId == original.GetValue<int>("StateId"));
+      old.NumberParks--;
+
+      State current = _db.States.FirstOrDefault(x=>x.StateId == currentChange.GetValue<int>("StateId"));
+      current.NumberParks++;
       _db.SaveChanges();
     }
 
@@ -106,6 +116,8 @@ namespace ParkApi.Controllers
     public void Delete(int id)
     {
       var parkToDelete = _db.Parks.FirstOrDefault(entry => entry.ParkId == id);
+      State state = _db.States.FirstOrDefault(entry=> entry.StateId == parkToDelete.StateId);
+      state.NumberParks--;
       _db.Parks.Remove(parkToDelete);
       _db.SaveChanges();
     }
