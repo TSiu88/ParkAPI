@@ -70,7 +70,7 @@ _This program also makes use of SQL databases. We recommend using MySQL Workbenc
 * _Markdown_
 
 ## Notable Features
-This API updates a running count of number of parks in a state as parks are added, deleted, and modified to switch states.
+This API updates a running count of number of parks in a state as parks are added, deleted, and modified to switch states.  This README also contains multiple expandable sections and a gif file.
 
 ## Specifications
 
@@ -93,7 +93,7 @@ This API updates a running count of number of parks in a state as parks are adde
 ### Assignment Objectives
 
 <details>
-  <summary>Expand to view Assignement Objectives</summary>
+  <summary>Expand to view Assignment Objectives</summary>
 
 **At the very least, your API should include the following:**
 
@@ -104,8 +104,11 @@ This API updates a running count of number of parks in a state as parks are adde
 #### Objectives:
 
 [x] Application includes CRUD functionality and successfully returns responses to API calls.
+
 [x] Application includes at least one of the further exploration objectives: authentication, versioning, pagination, Swagger documentation, or CORS.
+
 [x] Application is well-documented, including specific documentation on further exploration.
+
 [x] Commit history clearly shows eight hours of work.
 
 #### Further Exploration:
