@@ -13,7 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using ParkApi.Models;
 using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.Swagger; 
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace ParkApi
 {
@@ -68,7 +68,7 @@ namespace ParkApi
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
         c.RoutePrefix = string.Empty;
       });
-      
+
     }
   }
 }
