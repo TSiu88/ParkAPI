@@ -93,7 +93,7 @@ namespace ParkApi.Controllers
     public ActionResult<IEnumerable<Park>> GetRandom()
     {
       var random = new Random();
-      var query = _db.Parks.OrderBy(a => random.Next()).Take(3).ToList();
+      var query = _db.Parks.Include(entry => entry.State).OrderBy(a => random.Next()).Take(3).ToList();
       return query.ToList();
     }
 
@@ -108,7 +108,7 @@ namespace ParkApi.Controllers
       state.NumberParks++;
       _db.SaveChanges();
 
-      return _db.Parks.ToList();
+      return _db.Parks.Include(entry => entry.State).ToList();
     }
 
     // PUT api/parks/5
@@ -129,7 +129,7 @@ namespace ParkApi.Controllers
       current.NumberParks++;
       _db.SaveChanges();
 
-      return _db.Parks.ToList();
+      return _db.Parks.Include(entry => entry.State).ToList();
     }
 
     // DELETE api/parks/5
@@ -141,7 +141,7 @@ namespace ParkApi.Controllers
       state.NumberParks--;
       _db.Parks.Remove(parkToDelete);
       _db.SaveChanges();
-      return _db.Parks.ToList();
+      return _db.Parks.Include(entry => entry.State).ToList();
     }
   }
 }
