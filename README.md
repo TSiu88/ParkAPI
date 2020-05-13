@@ -1,6 +1,7 @@
 # _[Park API](https://github.com/TSiu88/parkApi)_
 
-#### _Week 13 Friday Independent Assignment for Epicodus, 04.03.2020_
+#### _Week 13 Friday Independent Assignment for Epicodus, Created: 04.03.2020_
+##### Updated with Azure deployment and modified for React on 5.12.2020
 
 #### By _**Tiffany Siu**_
 
@@ -27,7 +28,7 @@
 ---
 ## Description
 
-This application is the Week 13 Friday independent assignment for Epicodus' full time Intro to Programming and C#/React course.  This is an application made to show building a custom API with full functionality and include a more advanced function.
+This application is the Week 13 Friday independent assignment for Epicodus' full time Intro to Programming and C#/React course.  This is an application made to show building a custom API with full functionality and include a more advanced function.  It is deployed to [Azure](http://park-info-api.azurewebsites.net/index.html) and is used with the front end application [Parks-redux-api](https://github.com/TSiu88/Parks-redux-api).
 
 For this API, a user can add information and locations of parks found in the US.  The parks can be stored with a name, type (national or state), description, location/city, and state.  The database can be searched for these properties with the correct route structure.  States can also be stored in another table in the database and also holds the number of parks that are within that state.  The number of parks updates when parks are added, deleted, or modified.
 
@@ -65,6 +66,7 @@ _This program also makes use of SQL databases. We recommend using MySQL Workbenc
 * _C#_
 * _HTML_
 * _CSS_
+* _Azure_
 * _MSTest_
 * _Razor_
 * _Markdown_
